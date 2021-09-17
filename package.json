@@ -1,6 +1,7 @@
 {
   "name": "fb-week4",
   "version": "1.0.0",
+  "type": "module",
   "description": "api week 4",
   "engines": {
     "node": "14.17.0"
