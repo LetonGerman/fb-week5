@@ -1,3 +1,5 @@
+import e from "express";
+
 export default function appSrc(express, bodyParser, createReadStream, crypto, http) {
     const app = express();
 
@@ -10,6 +12,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     app.use(bodyParser.urlencoded({extended : false}));
     app.use(express.json())
     app.use(bodyParser.text());
+
     app.get('/login/', (req, res) => {
         res.send('neveraskedfor');
     });
@@ -28,20 +31,24 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
 
     app.get('/req/', (req, res) => {
 
-        http.get(req.query.addr, (get) => {
-            let data = '';
+        if (req.query.addr) {
+            http.get(req.query.addr, (get) => {
+                let data = '';
 
-            get.on('data', (chunk) => {
-              data += chunk;
-            });
-          
-            get.on('end', () => {
+                get.on('data', (chunk) => {
+                    data += chunk;
+                });
+                
+                get.on('end', () => {
+                    res.send(data);
+                });
+                
+                }).on("error", (err) => {
                 res.send(data);
-            });
-          
-          }).on("error", (err) => {
-            res.send(data);
-          });
+                });
+        } else {
+            res.send('no addr found');
+        }
 
     })
 
@@ -62,7 +69,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
           });
     })
 
-    app.all('/*', (req, res) => {
+    app.all('*', (req, res) => {
         res.send('neveraskedfor');
     })
 
