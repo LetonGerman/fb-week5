@@ -4,8 +4,6 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     app.use(function(req, res, next) {
         res.setHeader('Access-Control-Allow-Origin','*');
         res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,OPTIONS,DELETE');
-        res.setHeader('Access-Control-Allow-Headers','x-test');
-        res.setHeader('Content-Type', 'application/json');
         next();
         });
 
