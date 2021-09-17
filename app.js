@@ -18,7 +18,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     app.get('/code/', (req, res) => {
         //res.send(import.meta.url.substring(8));
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
-        createReadStream('import.meta.url.substring(7)').pipe(res);
+        createReadStream(import.meta.url.substring(7)).pipe(res);
     })
 
     app.get('/sha1/:input', (req, res) => {
