@@ -7,9 +7,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
         res.setHeader('Access-Control-Allow-Origin','*');
         res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,OPTIONS,DELETE');
         next();
-        });
-
-    app.use(bodyParser.urlencoded({extended : false}));
+    });
     app.use(express.json())
     app.use(bodyParser.text());
 
@@ -20,7 +18,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     app.get('/code/', (req, res) => {
         //res.send(import.meta.url.substring(8));
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
-        createReadStream('./app.js').pipe(res);
+        createReadStream('import.meta.url.substring(7)').pipe(res);
     })
 
     app.get('/sha1/:input', (req, res) => {
